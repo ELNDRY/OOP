@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.yadryshnikova.HeapSortTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-21T13:40:59" hostname="DESKTOP-POUK5KN" time="0.032">
+  <properties/>
+  <testcase name="sortTest_orderedArray()" classname="ru.nsu.yadryshnikova.HeapSortTest" time="0.032"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
