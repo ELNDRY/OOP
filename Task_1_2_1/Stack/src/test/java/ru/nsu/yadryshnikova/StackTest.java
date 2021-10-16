@@ -3,12 +3,18 @@ package ru.nsu.yadryshnikova;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Vector;
 
 class StackTest {
 
-    class SomeClass{};
+    class SomeClass {
+    }
+
+    ;
 
     Stack<Integer> intStack;
 
@@ -43,7 +49,7 @@ class StackTest {
             intStack.push(hugeInt);
         }
 
-        for (int i = 14; i >=1; i--) {
+        for (int i = 14; i >= 1; i--) {
             hugeInt = i * 1000000;
             Assertions.assertEquals(hugeInt, intStack.pop());
         }
@@ -125,12 +131,12 @@ class StackTest {
     @Test
     void count() {
         Stack<Integer> countStack = new Stack<>();
-        int cnt = 0;
-       for (int i = 0; i < 100000; i++) {
-           countStack.push(i);
-           cnt += 1;
-           Assertions.assertEquals(countStack.count(), cnt);
-       }
+        int counter = 0;
+        for (int i = 0; i < 100000; i++) {
+            countStack.push(i);
+            counter += 1;
+            Assertions.assertEquals(countStack.count(), counter);
+        }
     }
 
     @Test
