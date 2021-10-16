@@ -1,17 +1,16 @@
 package ru.nsu.yadryshnikova;
 
+import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
-
 
 public class Stack<T> implements Iterable<T> {
 
     private T[] arrayStack;
     private int count = 0;
     private int maxSize = 30;
+    final private int LENGTHS_INCREASE = 2;
 
-    @SuppressWarnings("unchecked")
     public Stack() {
         arrayStack = (T[]) new Object[maxSize];
     }
@@ -30,16 +29,16 @@ public class Stack<T> implements Iterable<T> {
     }
 
     public T pop() {
-            if (count <= 0) {
-                throw new NoSuchElementException();
-            }
+        if (count <= 0) {
+            throw new EmptyStackException();
+        }
         count -= 1;
         return arrayStack[count];
     }
 
     public Stack<T> popStack(int size) {
-        if (size < 0) {
-            throw new NoSuchElementException();
+        if (size < 0 || size > count) {
+            throw new EmptyStackException();
         }
         Stack<T> poppedStack = new Stack<>();
         poppedStack.sizeChange(size);
@@ -53,18 +52,18 @@ public class Stack<T> implements Iterable<T> {
         return count;
     }
 
-    private void sizeChange (int toSize)  {
+    private void sizeChange(int toSize) {
         while (arrayStack.length < toSize) {
-            arrayStack = Arrays.copyOf(arrayStack, arrayStack.length * 2);
+            arrayStack = Arrays.copyOf(arrayStack, arrayStack.length * LENGTHS_INCREASE);
         }
     }
 
-   @Override
-   public Iterator<T> iterator() {
-        return new Itr();
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterate();
     }
 
-    private class Itr implements Iterator<T> {
+    private class Iterate implements Iterator<T> {
         int pointer = 0;
 
         @Override
