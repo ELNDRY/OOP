@@ -1,82 +1,158 @@
 package ru.nsu.yadryshnikova;
 
-import java.util.Map;
+import java.util.*;
+import java.util.Collection;
 
-public class GradeBook {
+public class GradeBook extends Semesters {
 
+    final private int AMOUNT_OF_SEMESTERS = 9;
     private int gradeBookNumber;
     private String studentName;
     private String faculty;
     private String specialty;
     private int qualifyingWorkGrade;
+    private final Semesters[] semesters = new Semesters[AMOUNT_OF_SEMESTERS];
 
-    public enum Grade {
-        SATISFACTORY(3),
-        GOOD(4),
-        EXСELLENT(5);
 
-        public final int value;
-
-        Grade(int value) {
-            this.value = value;
-        }
-    }
-
-    public enum Subject {
-        INTRODUCTION_TO_ALGEBRA_AND_ANALYSIS,
-        INTRODUCTION_TO_DISCRETE_MATH_ANDMATHEMATICAL_LOGIC,
-        DECLARATIVE_PROGRAMMING,
-        IMPERATIVE_PROGRAMMING,
-        FUNDAMENTALS_OF_SPEECH_CULTURE,
-        FOREIGN_LANGUAGE,
-        DIGITAL_PLATFORMS,
-        MEASURING_WORKSHOP,
-        HISTORY,
-    }
-
-    private Map<Subject, Grade[]> marks;
-    private Grade qualificationWorkGrade;
-
-    private int totalScore = 0;
-    private int scoreAmount = 0;
-    private int satisfactoryCount = 0;
-    private int excellentCount = 0;
-    private double averageScore = 0;
-
-    public GradeBook(Map<Subject, Grade[]> marks, Grade qualificationWorkGrade, int gradeBookNumber, String studentName, String faculty, String specialty) {
+    /**
+     * GradeBook constructor.
+     * semesters are counted from 1 to 8
+     **/
+    public GradeBook(int gradeBookNumber, int qualificationWorkGrade, String studentName, String faculty, String specialty) {
         this.gradeBookNumber = gradeBookNumber;
         this.studentName = studentName;
         this.faculty = faculty;
         this.specialty = specialty;
-        this.qualificationWorkGrade = qualificationWorkGrade;
-        this.marks = marks;
+        this.qualifyingWorkGrade = qualificationWorkGrade;
 
-        for(Map.Entry<Subject, Grade[]> entry : marks.entrySet()) {
-            Grade[] grades = entry.getValue();
-            for (Grade i : grades) {
-                if (i.value == 3) {
-                    satisfactoryCount += 1;
-                } else if (i.value == 5) {
-                    excellentCount += 1;
-                }
-                scoreAmount++;
-                totalScore += i.value;
-            }
+        for (int i = 1; i < AMOUNT_OF_SEMESTERS; i++) {
+            Semesters semester = new Semesters();
+            semesters[i] = semester;
         }
-        averageScore =  totalScore / scoreAmount;
+
     }
 
-    public void setSpecialty(int id) {
+    /**
+     * Set number of current gradebook.
+     *
+     * @param gradeBookNumber number of current gradebook.
+     **/
+    public void setGradeBookNumber(int gradeBookNumber) {
+        this.gradeBookNumber = gradeBookNumber;
+    }
+
+    /**
+     * Get number of current gradebook
+     *
+     * @return gradeBookNumber
+     **/
+    public int getGradeBookNumber() {
+        return gradeBookNumber;
+    }
+
+    /**
+     * Set name of the owner of the gradebook.
+     *
+     * @param gradeBookNumber number of current gradebook.
+     **/
+    public void setStudentName(int gradeBookNumber) {
+        this.studentName = studentName;
+    }
+
+    /**
+     * Get name of the owner of the gradebook
+     *
+     * @return studentName
+     **/
+    public String getStudentName() {
+        return studentName;
+    }
+
+    /**
+     * Set faculty of the owner of the gradebook.
+     *
+     * @param gradeBookNumber number of current gradebook.
+     **/
+    public void setFaculty(int gradeBookNumber) {
+        this.faculty = faculty;
+    }
+
+    /**
+     * Get faculty of the owner of the gradebook
+     *
+     * @return faculty
+     **/
+    public String getFaculty() {
+        return faculty;
+    }
+
+    /**
+     * Set specialty of the owner of the gradebook.
+     *
+     * @param gradeBookNumber number of current gradebook.
+     **/
+    public void setSpecialty(int gradeBookNumber) {
         this.specialty = specialty;
     }
 
-    public double getAverageScore() {
-        return averageScore;
+    /**
+     * Get specialty of the owner of the gradebook
+     *
+     * @return faculty *
+     **/
+    public String getSpecialty() {
+        return specialty;
     }
-    public boolean isRedDiploma() {
-        return satisfactoryCount == 0 && (double) excellentCount / totalScore >= 0.75 && qualificationWorkGrade == Grade.EXСELLENT;
+
+    /**
+     * Set qualifying work grade of the owner of the gradebook.
+     *
+     * @param gradeBookNumber number of current gradebook.
+     **/
+    public void setQualifyingWorkGrade(int gradeBookNumber) {
+        this.qualifyingWorkGrade = qualifyingWorkGrade;
     }
-    public boolean isIncreasedScholarship() {
-        return satisfactoryCount == 0 && excellentCount / totalScore >= 0.5;
+
+    /**
+     * Get qualifying work grade of the owner of the gradebook
+     *
+     * @return qualifyingWorkGrade
+     **/
+    public int getQualifyingWorkGrade() {
+        return qualifyingWorkGrade;
+    }
+
+    /**
+     * Add the name of the subject and the grade for it to the gradebook
+     *
+     * @param semester number of current semester.
+     * @param subject  number name of the subject.
+     * @param grade    grade for subject.
+     **/
+    public void add(int semester, String subject, int grade) {
+        this.semesters[semester].setGrade(subject, grade);
+    }
+
+    /**
+     * Get all grades in a given semester
+     *
+     * @param semesterCount number of given semester.
+     * @return grades
+     **/
+    public Collection<Integer> getSemesterGrades(int semesterCount) {
+        return semesters[semesterCount].getGrades();
+    }
+
+    /**
+     * Get all grades
+     *
+     * @return all given grades
+     **/
+    public ArrayList<Integer> getAllGrades() {
+        ArrayList<Integer> grades = new ArrayList<>();
+        for (int i = 1; i < AMOUNT_OF_SEMESTERS; i++) {
+            grades.addAll(semesters[i].getGrades());
+        }
+        return grades;
     }
 }

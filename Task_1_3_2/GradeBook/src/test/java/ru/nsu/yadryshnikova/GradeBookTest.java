@@ -3,65 +3,57 @@ package ru.nsu.yadryshnikova;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 class GradeBookTest {
 
     GradeBook gradeBook;
 
-    @BeforeEach
-    void gradeBook_constructor() {
-        Map<GradeBook.Subject, GradeBook.Grade[]> marks = new HashMap<>();
-
-        marks.put(GradeBook.Subject.INTRODUCTION_TO_ALGEBRA_AND_ANALYSIS,
-                new GradeBook.Grade[]{GradeBook.Grade.SATISFACTORY, GradeBook.Grade.SATISFACTORY}
-        );
-        marks.put(GradeBook.Subject.INTRODUCTION_TO_DISCRETE_MATH_ANDMATHEMATICAL_LOGIC,
-                new GradeBook.Grade[]{GradeBook.Grade.GOOD}
-        );
-        marks.put(GradeBook.Subject.DECLARATIVE_PROGRAMMING,
-                new GradeBook.Grade[]{GradeBook.Grade.GOOD}
-        );
-        marks.put(GradeBook.Subject.IMPERATIVE_PROGRAMMING,
-                new GradeBook.Grade[]{GradeBook.Grade.SATISFACTORY}
-        );
-        marks.put(GradeBook.Subject.FUNDAMENTALS_OF_SPEECH_CULTURE,
-                new GradeBook.Grade[]{GradeBook.Grade.EXСELLENT}
-        );
-
-        marks.put(GradeBook.Subject.FOREIGN_LANGUAGE,
-                new GradeBook.Grade[]{GradeBook.Grade.EXСELLENT}
-        );
-
-        marks.put(GradeBook.Subject.DIGITAL_PLATFORMS,
-                new GradeBook.Grade[]{GradeBook.Grade.GOOD}
-        );
-
-        marks.put(GradeBook.Subject.MEASURING_WORKSHOP,
-                new GradeBook.Grade[]{GradeBook.Grade.EXСELLENT}
-        );
-
-        marks.put(GradeBook.Subject.HISTORY,
-                new GradeBook.Grade[]{GradeBook.Grade.EXСELLENT}
-        );
-
-        gradeBook = new GradeBook(marks, GradeBook.Grade.EXСELLENT, 200613, "Yadryshnikova E.E.", "FIT", "Computer science and engineering");
-    }
-
-
     @Test
-    void getAverageScore() {
-        assertEquals(4.0, gradeBook.getAverageScore());
+    void getAverageScore() throws IOException {
+        GradeBook gradeBook = new GradeBook(200613, 4, "Yadryshnikova E.E.", "FIT", "Computer science and engineering");
+        gradeBook.add(1, "INTRODUCTION_TO_ALGEBRA_AND_ANALYSIS", 3);
+        gradeBook.add(2, "INTRODUCTION_TO_ALGEBRA_AND_ANALYSIS", 3);
+        gradeBook.add(2, "INTRODUCTION_TO_DISCRETE_MATH_AND_MATHEMATICAL_LOGIC", 4);
+        gradeBook.add(1, "DECLARATIVE_PROGRAMMING", 5);
+        gradeBook.add(1, "FUNDAMENTALS_OF_SPEECH_CULTURE", 5);
+        gradeBook.add(1, "FOREIGN_LANGUAGE", 5);
+        gradeBook.add(2, "FOREIGN_LANGUAGE", 5);
+
+        ArrayList<Integer> myGrades = gradeBook.getAllGrades();
+
+        assertEquals(4.29, GardeBookAnalysis.AverageScore(myGrades));
     }
 
     @Test
     void isRedDiploma() {
-        assertFalse(gradeBook.isRedDiploma());
+        GradeBook gradeBook = new GradeBook(200613, 4, "Yadryshnikova E.E.", "FIT", "Computer science and engineering");
+        gradeBook.add(1, "INTRODUCTION_TO_ALGEBRA_AND_ANALYSIS", 3);
+        gradeBook.add(2, "INTRODUCTION_TO_ALGEBRA_AND_ANALYSIS", 3);
+        gradeBook.add(2, "INTRODUCTION_TO_DISCRETE_MATH_AND_MATHEMATICAL_LOGIC", 4);
+        gradeBook.add(1, "DECLARATIVE_PROGRAMMING", 5);
+        gradeBook.add(1, "FUNDAMENTALS_OF_SPEECH_CULTURE", 5);
+        gradeBook.add(1, "FOREIGN_LANGUAGE", 5);
+        gradeBook.add(2, "FOREIGN_LANGUAGE", 5);
+
+        ArrayList<Integer> myGrades = gradeBook.getAllGrades();
+        assertFalse(GardeBookAnalysis.isRedDiploma(gradeBook));
     }
 
     @Test
     void isIncreasedScholarship() {
-        assertFalse(gradeBook.isIncreasedScholarship());
+
+        GradeBook gradeBook = new GradeBook(200613, 4, "Yadryshnikova E.E.", "FIT", "Computer science and engineering");
+        gradeBook.add(1, "INTRODUCTION TO ALGEBRA AND ANALYSIS", 3);
+        gradeBook.add(2, "INTRODUCTION TO ALGEBRA AND ANALYSIS", 3);
+        gradeBook.add(2, "INTRODUCTION TO DISCRETE MATH AND MATHEMATICAL LOGIC", 4);
+        gradeBook.add(1, "DECLARATIVE PROGRAMMING", 5);
+        gradeBook.add(1, "FUNDAMENTALS OF SPEECH CULTURE", 5);
+        gradeBook.add(1, "FOREIGN LANGUAGE", 5);
+        gradeBook.add(2, "FOREIGN LANGUAGE", 5);
+        ArrayList<Integer> myGrades = gradeBook.getAllGrades();
+        assertFalse(GardeBookAnalysis.isIncreasedScholarship(gradeBook, 1));
     }
+
 }
