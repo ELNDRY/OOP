@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.yadryshnikova.GradeBookTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-10-27T15:04:09" hostname="DESKTOP-POUK5KN" time="0.035">
+  <properties/>
+  <testcase name="getAverageScore()" classname="ru.nsu.yadryshnikova.GradeBookTest" time="0.031"/>
+  <testcase name="isIncreasedScholarship()" classname="ru.nsu.yadryshnikova.GradeBookTest" time="0.002"/>
+  <testcase name="isRedDiploma()" classname="ru.nsu.yadryshnikova.GradeBookTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
