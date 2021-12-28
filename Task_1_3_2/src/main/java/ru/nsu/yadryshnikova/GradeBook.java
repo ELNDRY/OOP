@@ -144,7 +144,7 @@ public class GradeBook {
     /**
      * Set specialty of the owner of the gradebook.
      *
-     * @param gradeBookNumber number of current gradebook.
+     * @param specialty of the owner of the gradebook.
      **/
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
@@ -162,7 +162,7 @@ public class GradeBook {
     /**
      * Set qualifying work grade of the owner of the gradebook.
      *
-     * @param gradeBookNumber number of current gradebook.
+     * @param qualifyingWorkGrade of current gradebook.
      **/
     public void setQualifyingWorkGrade(int qualifyingWorkGrade) {
         this.qualifyingWorkGrade = qualifyingWorkGrade;
