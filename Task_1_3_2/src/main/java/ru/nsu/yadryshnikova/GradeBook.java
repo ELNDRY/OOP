@@ -110,7 +110,7 @@ public class GradeBook {
      *
      * @param gradeBookNumber number of current gradebook.
      **/
-    public void setStudentName(int gradeBookNumber) {
+    public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
 
