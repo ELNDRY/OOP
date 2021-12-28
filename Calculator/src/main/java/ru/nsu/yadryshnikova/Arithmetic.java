@@ -1,39 +1,25 @@
 package ru.nsu.yadryshnikova;
 
+import ru.nsu.yadryshnikova.operations.*;
+
 public class Arithmetic {
-    public static double add(double a, double b) {
-        return a + b;
-    }
 
-    public static double sub(double a, double b) {
-        return a - b;
-    }
+    /**
+     * @param arg specifies the type of operation
+     */
 
-    public static double mult(double a, double b) {
-        return a * b;
-    }
-
-    public static double div(double a, double b) {
-        return a / b;
-    }
-
-    public static double log(double a) {
-        return Math.log(a);
-    }
-
-    public static double pow(double a, double b) {
-        return Math.pow(a, b);
-    }
-
-    public static double sqrt(double a) {
-        return Math.sqrt(a);
-    }
-
-    public static double sin(double a) {
-        return Math.sin(a);
-    }
-
-    public static double cos(double a) {
-        return Math.cos(a);
+    public static Operation operation(String arg) {
+        return switch (arg) {
+            case "+" -> new Add();
+            case "-" -> new Sub();
+            case "*" -> new Mult();
+            case "/" -> new Div();
+            case "log" -> new Log();
+            case "pow" -> new Pow();
+            case "sin" -> new Sin();
+            case "cos" -> new Cos();
+            case "sqrt" -> new Sqrt();
+            default -> new Val(Double.parseDouble(arg));
+        } ;
     }
 }
