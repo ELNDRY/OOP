@@ -3,12 +3,11 @@ package ru.nsu.yadryshnikova.kitchen;
 import ru.nsu.yadryshnikova.collection.SharedList;
 import ru.nsu.yadryshnikova.config.PizzeriaConfiguration;
 import ru.nsu.yadryshnikova.order.Order;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenFactory {
-    public static void createCookers(
+    public static List<Cooker> createCookers(
             SharedList<Order> queueForKitchen,
             PizzeriaConfiguration.CookConfiguration configuration,
             SharedList<Order> queueForWarehouse,
@@ -22,6 +21,12 @@ public class KitchenFactory {
                 exp.add(0);
             }
         }
-        exp.forEach((it) -> new Baker(it, queueForKitchen, cokingTime, queueForWarehouse).start());
+        List<Cooker> cookers = new ArrayList<>();
+        exp.forEach((it) -> {
+            var cooker = new Cooker(it, queueForKitchen, cokingTime, queueForWarehouse);
+            cooker.start();
+            cookers.add(cooker);
+        });
+        return cookers;
     }
 }
