@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "7.1.1"
+}
+
+mainClassName = 'ru.nsu.yadryshnikova.NotebookCLIsh '
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.beust:jcommander:1.81'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation 'info.picocli:picocli:4.6.2'
+    implementation 'org.assertj:assertj-core:3.21.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    testImplementation 'org.junit.platform:junit-platform-runner:1.8.1'
+}
+shadowJar {
+    archiveBaseName.set('shadow')
+//    archiveClassifier.set('')
+//    archiveVersion.set('')
+}
+test {
+    useJUnitPlatform()
+
+}
+
+application {
+    mainClass = 'ru.nsu.yadryshnikova.NotebookCLI'
+}
